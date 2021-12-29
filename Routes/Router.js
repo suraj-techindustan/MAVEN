@@ -10,11 +10,10 @@ const { otpGenerator, sendEmail } = require('../common/utils');
 
 
 
-
-
 Router.get('/home', (req, res) => {
     res.send('home')
 })
+
 
 Router.post('/adduser', [joiValidation], async (req, res) => {
 
@@ -41,6 +40,11 @@ Router.post('/adduser', [joiValidation], async (req, res) => {
 
 Router.post('/login', async (req, res) => {
 
+try{
+
+    const { email } = req.body
+    if (!email) return res.status(400).send({ message: "Please enter Email" })
+
     const user = await User.findOne({
         email: req.body.email
     })
@@ -58,11 +62,21 @@ Router.post('/login', async (req, res) => {
         message: "User Logged In Successfully",
         token: acessToken
     })
-    // console.log(req.session.loggedin)
+  
+
+}catch (ex){
+    res.status(400).send({ message: ex.message || 'Something went wrong' })
+
+}
 
 })
 
 Router.get('/getUser', [authenticateUser], async (req, res) => {
+try{
+
+    const { email } = req.body
+    if (!email) return res.status(400).send({ message: "Email doesn't exist." })
+
     const user = await User.findOne({
         email: req.body.email
     })
@@ -72,33 +86,13 @@ Router.get('/getUser', [authenticateUser], async (req, res) => {
 
     res.send(user)
 
+}catch(ex){
+
+    res.status(400).send({message : ex.message || 'Something went wrong'})
+
+}
 })
 
-
-
-// Router.post('/otp', async (req, res) => {
-
-//     const user = await User.findOne({
-//         email: req.body.email
-//     })
-//     if (!user) return res.status(400).send({
-//         message: "Invalid Email"
-//     })
-//     const { email = '', otp = '', expiresIn = '', expired = '', time = '' } = req.body || {}
-
-//     const otpData = new Otp({
-//         email,
-//         otp: otpGenerate(),
-//         expiresIn: 120,
-//         expired: false,
-//         // time : counter()
-//     })
-//     await otpData.save()
-//     res.status(200).send({
-//         message: "OTP Saved Sucessfully",
-//         value: otpData
-//     })
-// })
 
 Router.post('/forgot_password', async (req, res) => {
     try {
@@ -184,80 +178,6 @@ Router.put('/reset_password', async (req, res) => {
 
 
 
-
-// Router.put('/reset_password', async (req, res) => {
-
-//     try {
-//         const { password } = req.body
-//         if (!password) return res.status(400).send({ message: "Enter Password" })
-
-//         const user = await User.findOne({ email: req.body.email })
-//         if (!user) return res.status(400).send({ message: "Invalid email" })
-
-
-//         user.password = passwordHash.generate(password)
-//         req.body.password = user.password
-
-//         await user.save()
-//         res.send(user)
-
-//     } catch (ex) {
-//         res.status(400).send({ message: ex.message || 'Something went wrong' })
-
-//     }
-
-// })
-
-
-
-
-
 exports.Router = Router
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //     const {expired = ''} = req.body || {}
-
-    //     const otpData = new Otp({
-
-    //         expired:counter(),
-
-    //     })
-    //     await otpData.save()
-
-
-
-    // const user = await Otp.findOne({email:req.body.email})
-    // if(!user) return res.status(400).send({message : "Invalid Email"})
-
-    // const expires  = await Otp.findOne({expired : req.body.expired})
-    // if(expires==true) return res.status(400).send({message : "OTP is  Expire"})
-
-    // const otp  = await Otp.findOne({otp : req.body.otp})
-    // if(!otp) return res.status(400).send({message : "Invalid OTP"})
-
-
-
-
-    // res.send("Done")
