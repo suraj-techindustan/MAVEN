@@ -84,7 +84,7 @@ try{
         message: "Invalid Email"
     })
 
-    res.send(user)
+    // res.send(user)
 
 }catch(ex){
 
@@ -167,7 +167,7 @@ Router.put('/reset_password', async (req, res) => {
         req.body.password = user.password
 
         await user.save()
-        res.send(user)
+        // res.send(user)
 
     } catch (ex) {
         res.status(400).send({ message: ex.message || 'Something went wrong' })
