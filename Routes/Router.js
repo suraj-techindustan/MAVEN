@@ -8,8 +8,6 @@ const { Otp } = require('../Models/otp')
 const { otpGenerator, sendEmail } = require('../common/utils');
 
 
-
-
 Router.get('/home', (req, res) => {
     res.send('home')
 })
@@ -25,7 +23,6 @@ Router.post('/adduser', [joiValidation], async (req, res) => {
     const user = new User({
         userName,
         email,
-        password,
         password: hashedPassword
     })
 
@@ -40,57 +37,57 @@ Router.post('/adduser', [joiValidation], async (req, res) => {
 
 Router.post('/login', async (req, res) => {
 
-try{
+    try {
 
-    const { email } = req.body
-    if (!email) return res.status(400).send({ message: "Please enter Email" })
+        const { email } = req.body
+        if (!email) return res.status(400).send({ message: "Please enter Email" })
 
-    const user = await User.findOne({
-        email: req.body.email
-    })
-    if (!user) return res.status(400).send({
-        message: "Invalid Email"
-    })
+        const user = await User.findOne({
+            email: req.body.email
+        })
+        if (!user) return res.status(400).send({
+            message: "Invalid Email"
+        })
 
-    const isValidPassword = passwordHash.verify(req.body.password, user.password)
-    if (!isValidPassword) return res.status(400).send({
-        message: "Invalid Password"
-    })
+        const isValidPassword = passwordHash.verify(req.body.password, user.password)
+        if (!isValidPassword) return res.status(400).send({
+            message: "Invalid Password"
+        })
 
-    const acessToken = user.generateAccessToken();
-    return res.status(200).send({
-        message: "User Logged In Successfully",
-        token: acessToken
-    })
-  
+        const acessToken = user.generateAccessToken();
+        return res.status(200).send({
+            message: "User Logged In Successfully",
+            token: acessToken
+        })
 
-}catch (ex){
-    res.status(400).send({ message: ex.message || 'Something went wrong' })
 
-}
+    } catch (ex) {
+        res.status(400).send({ message: ex.message || 'Something went wrong' })
+
+    }
 
 })
 
 Router.get('/getUser', [authenticateUser], async (req, res) => {
-try{
+    try {
 
-    const { email } = req.body
-    if (!email) return res.status(400).send({ message: "Email doesn't exist." })
+        const { email } = req.body
+        if (!email) return res.status(400).send({ message: "Email doesn't exist." })
 
-    const user = await User.findOne({
-        email: req.body.email
-    })
-    if (!user) return res.status(400).send({
-        message: "Invalid Email"
-    })
+        const user = await User.findOne({
+            email: req.body.email
+        })
+        if (!user) return res.status(400).send({
+            message: "Invalid Email"
+        })
 
-    // res.send(user)
+        // res.send(user)
 
-}catch(ex){
+    } catch (ex) {
 
-    res.status(400).send({message : ex.message || 'Something went wrong'})
+        res.status(400).send({ message: ex.message || 'Something went wrong' })
 
-}
+    }
 })
 
 
