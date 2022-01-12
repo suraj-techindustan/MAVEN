@@ -1,15 +1,16 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
-  <Login />
+<router-link to="Home">Home</router-link>
+<router-view></router-view>
 </template>
 
 <script>
-import Login from './components/Login.vue'
+
 
 export default {
   name: 'App',
   components: {
-    Login
+  
   }
 }
 </script>
