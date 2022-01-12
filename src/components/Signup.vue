@@ -3,12 +3,12 @@
   <br />
   <input type="text" name="userName" placeholder="Enter Your Username"  v-model='userName'  />
   <br />
-  <input type="text" name="email" placeholder="Enter Your Email"  v-model='email'/>
+  <input type="email" name="email" placeholder="Enter Your Email"  v-model='email'/>
   <br />
   <input type="password" name="password" placeholder="Enter Your Password" v-model='password' />
   <br /><br />
   
-  <button v-on:click="Signup1">Signup</button>
+  <button v-on:click="Signup">Signup</button>
   
 </template>
 
@@ -18,8 +18,7 @@ import axios from 'axios'
 
 export default {
   name: "Signup",
-
-  data() {
+data(){
     return {
         userName :'',
         email :'',
@@ -27,9 +26,8 @@ export default {
       
     };
   },
-
   methods: {
-    async Signup() {
+      async Signup() {
       console.log(`${this.userName} ${this.email} ${this.password}`);
       let result = await axios.post('https://uiproject-01.herokuapp.com/adduser',{
           userName:this.userName,
@@ -39,11 +37,9 @@ export default {
       console.log("result : ", result)
     },
   },
+  
 
-  Signup1(){
-     console.log('called')
-  }
-};
+}
 </script>
 
 

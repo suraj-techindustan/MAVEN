@@ -1,51 +1,46 @@
 <template>
   <h1>Login Page</h1>
   <br />
-  <input type="text" placeholder="Enter Your Email" />
+  
+  <input type="email" name="email" placeholder="Enter Your Email"  v-model='email'/>
   <br />
-  <input type="password" placeholder="Enter Your Password" />
+  <input type="password" name="password" placeholder="Enter Your Password" v-model='password' />
   <br /><br />
-  <center>
-    <button>
-      <a href="https://uiproject-01.herokuapp.com/getUser">Login</a>
-    </button>
-  </center>
+  
+  <button v-on:click="Login">Login</button>
+
+  
 </template>
 
 
 <script>
+import axios from 'axios'
+
 export default {
   name: "Login",
-
-  data() {
+data(){
     return {
-      link: "https://uiproject-01.herokuapp.com/getUser",
+        email :'',
+        password :'',
+        
+      
     };
   },
-
   methods: {
-    Login() {
-      return this.link;
+      async Login() {
+      console.log(`${this.email} ${this.password}`);
+      let result = await axios.post('https://uiproject-01.herokuapp.com/login',{
+          email : this.email,
+          password : this.password
+      });
+      console.log("result : ", result)
+     
     },
   },
-};
+  
+
+}
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <style scoped>
