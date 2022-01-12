@@ -1,6 +1,9 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
 <router-link to="Home">Home</router-link>
+<router-link to="Login">Login</router-link>
+<router-link to="Signup">Signup</router-link>
+
 <router-view></router-view>
 </template>
 
