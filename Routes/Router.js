@@ -12,7 +12,6 @@ Router.get('/home', (req, res) => {
     res.send('home')
 })
 
-
 Router.post('/adduser', [joiValidation], async (req, res) => {
 
     const { userName = "", email = "", password = "" } = req.body || {}

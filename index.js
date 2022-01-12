@@ -6,7 +6,9 @@ dotenv.config()
 const Port = process.env.PORT
 const DB = process.env.DB
 const mongoose = require('mongoose');
+const cors = require('cors')
 
+app.use(cors())
 app.use(express.json())
 
 mongoose.connect(DB,{ useNewUrlParser : true , useUnifiedTopology : true})
