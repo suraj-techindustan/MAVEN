@@ -4,6 +4,7 @@ const Router = express.Router()
 const passwordHash = require('password-hash');
 const authenticateUser = require("../middleware/auth")
 const { Otp } = require('../Models/otp')
+const { Book } = require('../Models/books')
 // const counter = require('../middleware/timer');
 const { otpGenerator, sendEmail } = require('../common/utils');
 
@@ -169,6 +170,57 @@ Router.put('/reset_password', async (req, res) => {
         res.status(400).send({ message: ex.message || 'Something went wrong' })
 
     }
+
+})
+
+
+Router.post('/addBooks', async (req, res) => {
+
+    try {
+
+        const books = {title='', pageCount='', thumbnailUrl='', shortDescription='', longDescription='', status='', authors='', categories='' } = req.body || {}
+   
+        const newBooks = new Book({
+            
+            title,
+            pageCount,
+            thumbnailUrl,
+            shortDescription,
+            longDescription,
+            status,
+            authors,
+            categories
+        })
+        await newBooks.save()
+        res.status(200).send({ message: "Book Added Sucessfully", value: newBooks })
+
+    } catch (ex) {
+        res.status(400).send({ message: ex.message || 'Something Went Wrong' })
+
+    }
+
+
+})
+
+Router.get('/getBook',async (req,res)=>{
+
+    try{
+
+        const {title} = req.body
+        if(!title) return res.status(400).send({message : "Please Enter Book Name"})
+
+        const bookName = await Book.find({
+            title : req.body.title ,categories : req.body.categories
+        })
+        if(!bookName) return res.status(400).send({message : "Book Not Exist"})
+
+        return res.status(200).send({message : "Your Book" , value : bookName })
+
+
+    }catch (ex){
+        res.status(400).send({message : ex.message || "something Went wrong" })
+    }
+
 
 })
 
