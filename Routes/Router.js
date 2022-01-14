@@ -202,6 +202,24 @@ Router.post('/addBooks', async (req, res) => {
 
 })
 
+Router.get('/allBooks', async (req,res)=>{
+
+try{
+
+const showBooks = await Book.find()
+const bookTitle = showBooks.title
+
+return res.status(200).send({message : "All Books" , value : showBooks})
+
+}catch(ex){
+    res.status(400).send({message : ex.message || 'Something Went Wrong :('})
+
+}
+
+})
+
+
+
 Router.get('/getBook',async (req,res)=>{
 
     try{
