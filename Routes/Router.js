@@ -206,7 +206,7 @@ Router.get('/allBooks', async (req,res)=>{
 
 try{
 
-const showBooks = await Book.find()
+const showBooks = await Book.find().limit(10)
 const bookTitle = showBooks.title
 
 return res.status(200).send({message : "All Books" , value : showBooks})
