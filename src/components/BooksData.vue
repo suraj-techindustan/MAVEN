@@ -14,12 +14,9 @@
 <tr v-for="item in books.value" :key="item.title">
 
 <td><h5>{{item.title}}</h5></td>
-<!-- <h1>{item.title}</h1> -->
-<!-- {{title.title}} -->
-<!-- <td>hiiii</td>
-<p>hiii</p> -->
+
 </tr>
-<!-- <h1>{{books.value[0].title}}</h1> -->
+
 
 </tbody>
 
@@ -51,12 +48,12 @@ export default{
             Book.getAll().then(response=>{
                 this.books = response.data;
                 
-                console.log("books",typeof this.books)
-                console.log("books.value array", this.books.value)
-                console.log("books.value[0].title = ", this.books.value[0].title)
-                console.log("books.value[1].title = ", this.books.value[1].title)
-                console.log("books.value[2].title = ", this.books.value[2].title)
-
+                // console.log("books",typeof this.books)
+                // console.log("books.value array", this.books.value)
+                // console.log("books.value[0].title = ", this.books.value[0].title)
+                // console.log("books.value[1].title = ", this.books.value[1].title)
+                // console.log("books.value[2].title = ", this.books.value[2].title)
+                console.log('%c suraj', 'font-weight: bold; font-size: 50px;color: red; text-shadow: 3px 3px 0 rgb(217,31,38) , 6px 6px 0 rgb(226,91,14) , 9px 9px 0 rgb(245,221,8) , 12px 12px 0 rgb(5,148,68) , 15px 15px 0 rgb(2,135,206) , 18px 18px 0 rgb(4,77,145) , 21px 21px 0 rgb(42,21,113)');
 
                 
             })
