@@ -1,0 +1,76 @@
+const { Book } = require('../Models/books')
+const asyncMiddleWare = require('../middleware/async')
+
+
+
+exports.addBooks =  asyncMiddleWare(async(req, res) => {
+
+    try {
+       
+        const books = {title='', pageCount='', thumbnailUrl='', shortDescription='', longDescription='', status='', authors='', categories='' } = req.body || {}
+        if(!title)res.status(400).send({message : "Please Enter Title"})
+        if(!authors)res.status(400).send({message : "Please Enter Author Name"})
+
+
+        const newBooks = new Book({
+            
+            title,
+            pageCount,
+            thumbnailUrl,
+            shortDescription,
+            longDescription,
+            status,
+            authors,
+            categories
+        })
+        await newBooks.save()
+        res.status(200).send({ message: "Book Added Sucessfully", value: newBooks })
+
+    } catch (ex) {
+        res.status(400).send({ message: ex.message || 'Something Went Wrong' })
+
+    }
+
+
+})
+
+exports.allBooks=asyncMiddleWare(async(req,res)=>{
+
+try{
+
+const showBooks = await Book.find().limit(15)
+const bookTitle = showBooks.title
+
+return res.status(200).send({message : "All Books" , value : showBooks})
+
+}catch(ex){
+    res.status(400).send({message : ex.message || 'Something Went Wrong :('})
+
+}
+
+})
+
+
+//  getBook router is not done (search by word or some better find method is still needed)
+
+exports.getBook=asyncMiddleWare(async(req,res)=>{
+
+    try{
+
+        const {title} = req.body
+        if(!title) return res.status(400).send({message : "Please Enter Book Name"})
+
+        const bookName = await Book.find({
+            title : req.body.title ,categories : req.body.categories
+        })
+        if(!bookName) return res.status(400).send({message : "Book Not Exist"})
+
+        return res.status(200).send({message : "Your Book" , value : bookName })
+
+
+    }catch (ex){
+        res.status(400).send({message : ex.message || "something Went wrong" })
+    }
+
+
+})

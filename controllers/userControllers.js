@@ -1,19 +1,19 @@
-const express = require('express')
 const { User, joiValidation } = require('../Models/users')
-const Router = express.Router()
+
 const passwordHash = require('password-hash');
 const authenticateUser = require("../middleware/auth")
 const { Otp } = require('../Models/otp')
-const { Book } = require('../Models/books')
-// const counter = require('../middleware/timer');
+const asyncMiddleWare = require('../middleware/async') 
+
 const { otpGenerator, sendEmail } = require('../common/utils');
 
 
-Router.get('/home', (req, res) => {
-    res.send('home')
-})
+// Router.get('/home', (req, res) => {
+//     res.send('home')
+// })
 
-Router.post('/adduser', [joiValidation], async (req, res) => {
+// Router.post('/adduser', [joiValidation], async (req, res) => {
+exports.adduser=asyncMiddleWare(async(req, res) => {
 
     const { userName = "", email = "", password = "" } = req.body || {}
 
@@ -35,7 +35,7 @@ Router.post('/adduser', [joiValidation], async (req, res) => {
 
 })
 
-Router.post('/login', async (req, res) => {
+exports.login =asyncMiddleWare(async(req, res) => {
 
     try {
 
@@ -68,7 +68,7 @@ Router.post('/login', async (req, res) => {
 
 })
 
-Router.get('/getUser', [authenticateUser], async (req, res) => {
+exports.getUser = asyncMiddleWare(async(req, res) => {
     try {
 
         const { email } = req.body
@@ -91,7 +91,7 @@ Router.get('/getUser', [authenticateUser], async (req, res) => {
 })
 
 
-Router.post('/forgot_password', async (req, res) => {
+exports.forgotPassword = asyncMiddleWare(async (req, res) => {
     try {
         const { email } = req.body
         if (!email) return res.status(400).send({ message: "Email doesn't exist." })
@@ -123,7 +123,7 @@ Router.post('/forgot_password', async (req, res) => {
 })
 
 
-Router.post('/verifyOtp', async (req, res) => {
+exports.verifyOtp = asyncMiddleWare(async (req, res) => {
 
     try {
 
@@ -139,9 +139,6 @@ Router.post('/verifyOtp', async (req, res) => {
 
         res.send('You are Directed to reset password page')
 
-
-
-
     } catch (ex) {
         res.status(400).send({ message: ex.message || 'Something went wrong' })
     }
@@ -149,8 +146,7 @@ Router.post('/verifyOtp', async (req, res) => {
 })
 
 
-
-Router.put('/reset_password', async (req, res) => {
+exports.resetPassword = asyncMiddleWare(async(req, res) => {
 
     try {
         const { password } = req.body
@@ -172,79 +168,3 @@ Router.put('/reset_password', async (req, res) => {
     }
 
 })
-
-
-Router.post('/addBooks', async (req, res) => {
-
-    try {
-
-        const books = {title='', pageCount='', thumbnailUrl='', shortDescription='', longDescription='', status='', authors='', categories='' } = req.body || {}
-   
-        const newBooks = new Book({
-            
-            title,
-            pageCount,
-            thumbnailUrl,
-            shortDescription,
-            longDescription,
-            status,
-            authors,
-            categories
-        })
-        await newBooks.save()
-        res.status(200).send({ message: "Book Added Sucessfully", value: newBooks })
-
-    } catch (ex) {
-        res.status(400).send({ message: ex.message || 'Something Went Wrong' })
-
-    }
-
-
-})
-
-Router.get('/allBooks', async (req,res)=>{
-
-try{
-
-const showBooks = await Book.find().limit(15)
-const bookTitle = showBooks.title
-
-return res.status(200).send({message : "All Books" , value : showBooks})
-
-}catch(ex){
-    res.status(400).send({message : ex.message || 'Something Went Wrong :('})
-
-}
-
-})
-
-
-//  getBook router is not done (search by word or some better find method is still needed)
-
-Router.get('/getBook',async (req,res)=>{
-
-    try{
-
-        const {title} = req.body
-        if(!title) return res.status(400).send({message : "Please Enter Book Name"})
-
-        const bookName = await Book.find({
-            title : req.body.title ,categories : req.body.categories
-        })
-        if(!bookName) return res.status(400).send({message : "Book Not Exist"})
-
-        return res.status(200).send({message : "Your Book" , value : bookName })
-
-
-    }catch (ex){
-        res.status(400).send({message : ex.message || "something Went wrong" })
-    }
-
-
-})
-
-
-
-exports.Router = Router
-
-
