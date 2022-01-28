@@ -69,10 +69,8 @@ export default {
     color:black;
     background-color: #4CAF50;
     border-radius: 5px;
-    /* position: right; */
     position: absolute;
-
-  right: 90px;
+    right: 90px;
 
 }
 
@@ -81,9 +79,8 @@ export default {
     color:black;
     background-color: #0a8bf5;
     border-radius: 5px;
-       position: absolute;
-
-  right: 15px;
+    position: absolute;
+    right: 15px;
 }
 
 </style>
