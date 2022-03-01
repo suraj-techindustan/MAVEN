@@ -1,22 +1,12 @@
 <template>
   <h1 :class="{ doFont: true, docolorBG: true }">Welcome To Our Book Store</h1>
-
-  <div>
-    <table class="table">
-      <thead></thead>
-
-      <tbody>
-         
-        <tr v-for="item in books.value" :key="item.title">
-          <td>
-               <button class='readButton'>Read</button>
-               <button class='downloadButton'>Download</button>
-            <h5>{{ item.title }}</h5>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  
+    <div className="tile-container">
+      <div v-for="item in books.value" :key="item.id" className="card">
+          {{ item.title }}
+          <img :src="item.thumbnailUrl" alt="thumbnailUrl"/>
+      </div>
+    </div>
 </template>
 
 <script>
@@ -27,6 +17,7 @@ export default {
     return {
       books: [],
       jsonCon: [],
+      // images : item.thumbnailUrl
     };
   },
   created() {
@@ -42,6 +33,7 @@ export default {
           // console.log("books.value array", this.books.value)
           // console.log("books.value[0].title = ", this.books.value[0].title)
           // console.log("books.value[1].title = ", this.books.value[1].title)
+          // console.log("books.value[2].title = ", this.books.value[2].title)
           // console.log("books.value[2].title = ", this.books.value[2].title)
           console.log(
             "%c suraj",
@@ -82,5 +74,17 @@ export default {
     position: absolute;
     right: 15px;
 }
-
+.tile-container{
+  display:flex;
+  grid-gap:10px;
+  flex-direction:row;
+  flex-wrap:wrap;
+}
+.card{
+  display: flex;
+  flex-direction: column;
+  width:fit-content;
+  height:fit-content;
+  box-shadow: 6px 5px 9px -7px #888888;
+}
 </style>
