@@ -1,11 +1,12 @@
 <template>
- <!-- <div id="screen" :style="{ 'background-color': backgroundColor }"> -->
+ <div id="screen" :style="{ 'background-color': backgroundColor }">
+  <h1 :class="{ neonText: true  }">Welcome To Our Book Store</h1>
 
 
 <BooksData />
 
 
-<!-- </div> -->
+</div>
 
 </template>
 <script>
@@ -16,7 +17,7 @@ export default {
  data() {
     return {
     
-      backgroundColor: "#006666",
+      backgroundColor: "#2D3032",
     };
   },
 
@@ -47,6 +48,23 @@ export default {
 .navBarColor{
   color : #292929;
 }
+
+.neonText {
+    color: #fff;
+    text-shadow:
+      0 0 7px #fff,
+      0 0 10px #fff,
+      0 0 21px #fff,
+      0 0 42px #f09,
+      0 0 82px #f09,
+      0 0 92px #f09,
+      0 0 102px #f09,
+      0 0 151px #f09;
+    font-family: "Vibur", sans-serif;
+    background-color: #2D3032;
+
+
+  }
 
 
 </style>

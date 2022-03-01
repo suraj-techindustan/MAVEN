@@ -1,10 +1,10 @@
 <template>
-  <h1 :class="{ doFont: true, docolorBG: true }">Welcome To Our Book Store</h1>
+  <!-- <h1 :class="{ neonText: true  }">Welcome To Our Book Store</h1> -->
   
     <div className="tile-container">
-      <div v-for="item in books.value" :key="item.id" className="card">
-          {{ item.title }}
-          <img :src="item.thumbnailUrl" alt="thumbnailUrl"/>
+      <div v-for="item in books.value" :key="item" :class="{card:true,imgFont:true}">
+          <img :src="item.thumbnailUrl" alt="thumbnailUrl"  />
+          {{ item.title}}
       </div>
     </div>
 </template>
@@ -31,7 +31,8 @@ export default {
 
           // console.log("books",typeof this.books)
           // console.log("books.value array", this.books.value)
-          // console.log("books.value[0].title = ", this.books.value[0].title)
+          // console.log("books.value array", this.books.value.title)
+          // console.log("books.value[0].title = ", this.books.value)
           // console.log("books.value[1].title = ", this.books.value[1].title)
           // console.log("books.value[2].title = ", this.books.value[2].title)
           // console.log("books.value[2].title = ", this.books.value[2].title)
@@ -50,11 +51,18 @@ export default {
 
 
 <style scoped>
-.doFont {
+/* .doFont {
   font-family: Verdana;
+  color : red
+} */
+.imgFont{
+  font-family: Verdana;
+  color : red;
+  font-size: 2%;
 }
+
 .docolorBG {
-  background-color: aqua;
+  background-color:#2D3032;
 }
 .readButton{
     font-family:Tahoma;
@@ -66,25 +74,45 @@ export default {
 
 }
 
+  .neonText {
+    color: #fff;
+    text-shadow:
+      0 0 7px #fff,
+      0 0 10px #fff,
+      0 0 21px #fff,
+      0 0 42px #f09,
+      0 0 82px #f09,
+      0 0 92px #f09,
+      0 0 102px #f09,
+      0 0 151px #f09;
+    font-family: "Vibur", sans-serif;
+    background-color: #010a01;
+
+
+  }
+
 .downloadButton{
     font-family:Tahoma;
     color:black;
-    background-color: #0a8bf5;
+    background-color: #0a1af5;
     border-radius: 5px;
     position: absolute;
     right: 15px;
 }
 .tile-container{
   display:flex;
-  grid-gap:10px;
+  grid-gap:102px;
   flex-direction:row;
   flex-wrap:wrap;
+  margin-left: 3%;
 }
 .card{
   display: flex;
   flex-direction: column;
-  width:fit-content;
-  height:fit-content;
+  height:110px;
+  width:130px; 
+  /* width:fit-content; */
+  /* height:fit-content; */
   box-shadow: 6px 5px 9px -7px #888888;
 }
 </style>
