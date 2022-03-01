@@ -11,9 +11,7 @@ exports.addBooks =  asyncMiddleWare(async(req, res) => {
         if(!title)res.status(400).send({message : "Please Enter Title"})
         if(!authors)res.status(400).send({message : "Please Enter Author Name"})
 
-
         const newBooks = new Book({
-            
             title,
             pageCount,
             thumbnailUrl,
@@ -31,14 +29,13 @@ exports.addBooks =  asyncMiddleWare(async(req, res) => {
 
     }
 
-
 })
 
 exports.allBooks=asyncMiddleWare(async(req,res)=>{
 
 try{
 
-const showBooks = await Book.find().limit(15)
+const showBooks = await Book.find().limit(21)
 const bookTitle = showBooks.title
 
 return res.status(200).send({message : "All Books" , value : showBooks})
@@ -47,7 +44,6 @@ return res.status(200).send({message : "All Books" , value : showBooks})
     res.status(400).send({message : ex.message || 'Something Went Wrong :('})
 
 }
-
 })
 
 
