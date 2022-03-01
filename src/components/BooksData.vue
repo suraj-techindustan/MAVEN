@@ -1,10 +1,10 @@
 <template>
-  <!-- <h1 :class="{ neonText: true  }">Welcome To Our Book Store</h1> -->
-  
+ 
     <div className="tile-container">
       <div v-for="item in books.value" :key="item" :class="{card:true,imgFont:true}">
           <img :src="item.thumbnailUrl" alt="thumbnailUrl"  />
-          {{ item.title}}
+          {{item.title}}
+          
       </div>
     </div>
 </template>
@@ -30,8 +30,8 @@ export default {
           this.books = response.data;
 
           // console.log("books",typeof this.books)
-          // console.log("books.value array", this.books.value)
-          // console.log("books.value array", this.books.value.title)
+          console.log("books.value array", this.books.value)
+          console.log("books.value array", this.books.value.title)
           // console.log("books.value[0].title = ", this.books.value)
           // console.log("books.value[1].title = ", this.books.value[1].title)
           // console.log("books.value[2].title = ", this.books.value[2].title)
@@ -58,7 +58,7 @@ export default {
 .imgFont{
   font-family: Verdana;
   color : red;
-  font-size: 2%;
+  /* font-size: 12%; */
 }
 
 .docolorBG {
