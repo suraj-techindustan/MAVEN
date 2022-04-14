@@ -1,28 +1,30 @@
 <template>
  <div id="screen" :style="{ 'background-color': backgroundColor }">
-  <h1 :class="{ neonText: true  }">Welcome To Our Book Store</h1>
-
-
+  <h1 :class="{ neonText: true  }">Books...</h1>
 <BooksData />
 
 
 </div>
 
+
 </template>
 <script>
 import BooksData from './components/BooksData.vue'
+
 
 export default {
   name: 'App',
  data() {
     return {
     
-      backgroundColor: "#2D3032",
+      // backgroundColor: "#2D3032",
+      backgroundColor: "#1111",
     };
   },
 
   components: {
     BooksData,
+
    
   
   },
