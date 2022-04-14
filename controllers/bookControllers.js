@@ -33,17 +33,14 @@ exports.addBooks =  asyncMiddleWare(async(req, res) => {
 
 exports.allBooks=asyncMiddleWare(async(req,res)=>{
 
-try{
+
 
 const showBooks = await Book.find().limit(21)
 const bookTitle = showBooks.title
 
 return res.status(200).send({message : "All Books" , value : showBooks})
 
-}catch(ex){
-    res.status(400).send({message : ex.message || 'Something Went Wrong :('})
 
-}
 })
 
 
@@ -51,7 +48,7 @@ return res.status(200).send({message : "All Books" , value : showBooks})
 
 exports.getBook=asyncMiddleWare(async(req,res)=>{
 
-    try{
+  
 
         const {title} = req.body
         if(!title) return res.status(400).send({message : "Please Enter Book Name"})
@@ -64,9 +61,15 @@ exports.getBook=asyncMiddleWare(async(req,res)=>{
         return res.status(200).send({message : "Your Book" , value : bookName })
 
 
-    }catch (ex){
-        res.status(400).send({message : ex.message || "something Went wrong" })
-    }
 
+})
+
+exports.singleBook = asyncMiddleWare(async(req,res)=>{
+
+let bookName = req.body.title  
+
+const showBook = await Book.findOne({bookName})
+if(!showBook) return res.status(400).send({message : "No book Found"})
+return res.status(200).send({message : "Book Details" , value : {title : showBook.title ,pageCount: showBook.pageCount ,isbn: showBook.isbn ,publishedDate:showBook.publishedDate ,shortDescription:showBook.shortDescription }})
 
 })
