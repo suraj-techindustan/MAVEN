@@ -2,7 +2,9 @@
  
     <div className="tile-container">
       <div v-for="item in books.value" :key="item" :class="{card:true,imgFont:true}"  >
-           <button ref="Btn" @click="retriveSingleBook"> <img :src="item.thumbnailUrl" alt="thumbnailUrl"  /></button>
+           <!-- <button ref="Btn" @click="retriveSingleBook"> -->
+              <img :src="item.thumbnailUrl" alt="thumbnailUrl"  />
+              <!-- </button> -->
          {{item.title}}
           <!-- {{item.title}} -->
       
@@ -40,7 +42,8 @@ export default {
         .then((response) => {
           this.books = response.data;
           console.log("books.value array", this.books.value)
-          console.log("books.value array", this.books.value.title)
+          // console.log("books.value array", this.books.value.title)
+          console.log("books.value array thumbnail", this.books.thumbnailUrl)
         })
         .catch((err) => {
           console.log(err);

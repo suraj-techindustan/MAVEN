@@ -1,15 +1,16 @@
 <template>
  <div id="screen" :style="{ 'background-color': backgroundColor }">
   <h1 :class="{ neonText: true  }">Books...</h1>
-<BooksData />
-
+<!-- <BooksData /> -->
+<Signup />
 
 </div>
 
 
 </template>
 <script>
-import BooksData from './components/BooksData.vue'
+// import BooksData from './components/BooksData.vue'
+import Signup from './components/Signup.vue'
 
 
 export default {
@@ -23,7 +24,8 @@ export default {
   },
 
   components: {
-    BooksData,
+    // BooksData,
+    Signup
 
    
   
