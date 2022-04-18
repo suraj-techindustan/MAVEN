@@ -43,33 +43,33 @@ return res.status(200).send({message : "All Books" , value : showBooks})
 
 })
 
-
 //  getBook router is not done (search by word or some better find method is still needed)
-
+ 
 exports.getBook=asyncMiddleWare(async(req,res)=>{
-
-  
-
-        const {title} = req.body
-        if(!title) return res.status(400).send({message : "Please Enter Book Name"})
-
-        const bookName = await Book.find({
-            title : req.body.title ,categories : req.body.categories
-        })
-        if(!bookName) return res.status(400).send({message : "Book Not Exist"})
-
-        return res.status(200).send({message : "Your Book" , value : bookName })
-
-
-
+ 
+ 
+       const {title} = req.body
+       if(!title) return res.status(400).send({message : "Please Enter Book Name"})
+ 
+       const bookName = await Book.find({
+           title : req.body.title ,categories : req.body.categories
+       })
+       if(!bookName) return res.status(400).send({message : "Book Not Exist"})
+ 
+       return res.status(200).send({message : "Your Book" , value : bookName })
+ 
+ 
+ 
 })
+
+
 
 exports.singleBook = asyncMiddleWare(async(req,res)=>{
 
 let bookName = req.body.title  
 
 const showBook = await Book.findOne({bookName})
-if(!showBook) return res.status(400).send({message : "No book Found"})
+// if(!showBook) return res.status(400).send({message : "No book Found"})
 return res.status(200).send({message : "Book Details" , value : {title : showBook.title ,pageCount: showBook.pageCount ,isbn: showBook.isbn ,publishedDate:showBook.publishedDate ,shortDescription:showBook.shortDescription }})
 
 })
