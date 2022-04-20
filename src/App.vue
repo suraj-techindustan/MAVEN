@@ -1,16 +1,17 @@
 <template>
- <div id="screen" :style="{ 'background-color': backgroundColor }">
-  <h1 :class="{ neonText: true  }">Books...</h1>
+ <!-- <div id="screen" :style="{ 'background-color': backgroundColor }">
+  <h1 :class="{ neonText: true  }">Books...</h1> -->
 <!-- <BooksData /> -->
-<Signup />
+<!-- <Signup /> -->
 
-</div>
+<!-- </div> -->
 
+<router-view />
 
 </template>
 <script>
 // import BooksData from './components/BooksData.vue'
-import Signup from './components/Signup.vue'
+// import Signup from './components/Signup.vue'
 
 
 export default {
@@ -25,7 +26,7 @@ export default {
 
   components: {
     // BooksData,
-    Signup
+    // Signup
 
    
   
@@ -69,6 +70,40 @@ export default {
 
 
   }
+/* Css for login and Signup */
+
+
+.register input ,.login input{
+    width: 300px;
+    height: 40px;
+    padding-left: 20px;
+    display: block;
+    border: 1px solid skyblue;
+    margin: 0px auto 30px auto;
+}
+.register ,.login h2{
+    color:skyblue;
+}
+
+.button_div{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+
+}
+
+.sigup_button button ,.login_button button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 15px;
+    font-size: 22px;
+    border-color: skyblue;
+    box-shadow: rgb(50 50 93 / 25%) 0px 50px 100px -20px, rgb(0 0 0 / 30%) 0px 30px 60px -30px, rgb(10 37 64 / 35%) 0px -2px 6px 0px inset;
+}
+
+
 
 
 </style>

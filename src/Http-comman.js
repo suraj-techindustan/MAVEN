@@ -4,7 +4,7 @@ import axios from "axios";
 
 export default axios.create({  
   // baseURL: "https://uiproject-01.herokuapp.com",  
-  baseURL: "http://e0fb-45-248-157-179.ngrok.io",  
+  baseURL: "https://maven-backend-62w3ju80o-suraj-techindustan.vercel.app/",  
   headers: {  
     "Content-type": "application/json"  
   }  

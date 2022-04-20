@@ -1,6 +1,6 @@
 <template>
-    <h1 :class="{doFont:true,docolorBG:true}">Book Store</h1>
-    
+    <!-- <h1 :class="{doFont:true,docolorBG:true}">Book Store</h1> -->
+    <h1>Home Page</h1>
 </template>
 
 <script>
