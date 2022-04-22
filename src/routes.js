@@ -1,10 +1,10 @@
 import {createRouter,createWebHistory} from 'vue-router'
 
-import Home from './components/Home.vue'
+// import Home from './components/Home.vue'
 import Login from './components/Login.vue'
 import Signup from './components/Signup.vue'
-// import BookData from './components/BooksData.vue'
-import ShopPage from './components/ShopPage.vue'
+import BookData from './components/BooksData.vue'
+// import ShopPage from './components/ShopPage.vue'
 
 const routes = [
         {
@@ -12,26 +12,26 @@ const routes = [
             path : "/signup",
             component : Signup   
         },
-        {
-        name : "Home",
-        path : "/",
-        component : Home    
-        },
+        // {
+        // name : "Home",
+        // path : "/",
+        // component : Home    
+        // },
     {
         name : "Login",
         path : "/login",
         component : Login   
     },
 
-//     {   name : "BookData",
-//         path : "/BookData",
-//         component : BookData   
-//     },
-
-    {   name : "ShopPage",
-        path : "/ShopPage",
-        component : ShopPage   
+    {   name : "BookData",
+        path : "/",
+        component : BookData   
     },
+
+    // {   name : "ShopPage",
+    //     path : "/ShopPage",
+    //     component : ShopPage   
+    // },
   
 ]
 
