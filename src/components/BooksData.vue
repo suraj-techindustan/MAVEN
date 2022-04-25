@@ -1,19 +1,19 @@
 <template>
  
     <div className="tile-container">
-      <div v-for="item in books.value" :key="item" :class="{card:true,imgFont:true}"  >
-           <!-- <button ref="Btn" @click="retriveSingleBook"> -->
+      <div v-for="item in books.value" :key="item.id" :class="{card:true,imgFont:true}"  >
+           <div id="myDiv" ref="myDiv"><button  @click="retriveSingleBook(item?.title)">
               <img :src="item.thumbnailUrl" alt="thumbnailUrl"  />
-              <!-- </button> -->
+              </button></div>
          {{item.title}}
-          <!-- {{item.title}} -->
-      
+  
 
       </div>
     </div>
 </template>
 
 <script>
+import axios from 'axios'
 
 import Book from "../Book";
 export default {
@@ -22,7 +22,9 @@ export default {
     return {
       books: [],
       jsonCon: [],
-      // images : item.thumbnailUrl
+      bookName:'',
+      myDiv : this.$refs.myDiv
+
     };
   },
   created() {
@@ -31,45 +33,56 @@ export default {
    
   },
 
- mounted () {
-    this.$refs.Btn.click()
-    },
-
 
   methods: {
-    retrivesBooks() {
+   retrivesBooks() {
       Book.getAll()
         .then((response) => {
           this.books = response.data;
-          console.log("books.value array", this.books.value)
-          // console.log("books.value array", this.books.value.title)
-          console.log("books.value array thumbnail", this.books.thumbnailUrl)
+          console.log(response)
+       
+
         })
         .catch((err) => {
           console.log(err);
         });
     },
 
-    logClicked () {
-      console.log('Clicked')
-    },
+//      logClicked (id) {
+//       // myDiv = this.$refs.myDiv
+//       console.log('The single book function clicked',id);
+//       // let result = await axios.post('https://maven-backend-62w3ju80o-suraj-techindustan.vercel.app/api/v1/book/singleBook',{
+//       //   // bookName: this.books.value.indexOf(this.item.thumbnailUrl)
+//       //   bookName: this.books.value.indexOf(this.item.thumbnailUrl)
+//       // })
+// // console.log('result : ', result)
+     
+//     },
 
 
 
-  retriveSingleBook(){
+  async retriveSingleBook(id){
 
-    console.log('clicked..')
+    console.log('clicked..',id)
 
-    Book.getSingleBook()
-    .then((response)=>{
-      this.books = response.data;
-    console.log("books.value array ----->",this.books.value.title)
+     let result = await axios.post('https://maven-backend-62w3ju80o-suraj-techindustan.vercel.app/api/v1/book/singleBook',{
+      //  bookName: this.books.value.indexOf(this.item.thumbnailUrl)
+        bookName: id
+     })
+     console.log('result::->',result)
+     }
 
-    }).catch((err)=>{
-      console.log(err);
-    });
+
+    // Book.getSingleBook()
+    // .then((response)=>{
+    //   this.books = response.data;
+    // console.log("books.value array ----->",this.books.value.title)
+
+    // }).catch((err)=>{
+    //   console.log(err);
+    // });
     
-  }
+  // }
 
   },
 };

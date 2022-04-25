@@ -1,34 +1,21 @@
 <template>
- <!-- <div id="screen" :style="{ 'background-color': backgroundColor }">
-  <h1 :class="{ neonText: true  }">Books...</h1> -->
-<!-- <BooksData /> -->
-<!-- <Signup /> -->
-
-<!-- </div> -->
 
 <router-view />
 
 </template>
 <script>
-// import BooksData from './components/BooksData.vue'
-// import Signup from './components/Signup.vue'
 
 
 export default {
   name: 'App',
  data() {
     return {
-    
-      // backgroundColor: "#2D3032",
+
       backgroundColor: "#1111",
     };
   },
 
   components: {
-    // BooksData,
-    // Signup
-
-   
   
   },
 }

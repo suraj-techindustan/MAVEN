@@ -40,7 +40,7 @@ export default{
                 console.warn('Signup Done')
             }
             localStorage.setItem("User-Info",JSON.stringify(result.data))
-            this.$router.push({name:'Home'})
+            this.$router.push({name:'BookData'})
         }
 
     },
@@ -48,7 +48,7 @@ export default{
 
         let user = localStorage.getItem('User-Info');
         if(user){
-            this.$router.push({name:'Home'})
+            this.$router.push({name:'BookData'})
         }
 
     }

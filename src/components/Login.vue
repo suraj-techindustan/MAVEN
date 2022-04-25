@@ -37,13 +37,13 @@ export default{
                 console.log('Login Done')
             }
             localStorage.setItem('User-Info',JSON.stringify(result.data))
-            this.$router.push({name:'Home'})
+            this.$router.push({name:'BookData'})
         }
     },
     mounted(){
         let user = localStorage.getItem('User-Info');
         if(user){
-            this.$router.push({name:"Home"})
+            this.$router.push({name:"BookData"})
         }
     }
 
