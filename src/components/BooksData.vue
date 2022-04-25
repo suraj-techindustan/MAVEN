@@ -48,35 +48,20 @@ export default {
         });
     },
 
-//      logClicked (id) {
-//       // myDiv = this.$refs.myDiv
-//       console.log('The single book function clicked',id);
-//       // let result = await axios.post('https://maven-backend-62w3ju80o-suraj-techindustan.vercel.app/api/v1/book/singleBook',{
-//       //   // bookName: this.books.value.indexOf(this.item.thumbnailUrl)
-//       //   bookName: this.books.value.indexOf(this.item.thumbnailUrl)
-//       // })
-// // console.log('result : ', result)
-     
-//     },
-
-
 
   async retriveSingleBook(id){
 
     console.log('clicked..',id)
 
-     let result = await axios.post('https://maven-backend-62w3ju80o-suraj-techindustan.vercel.app/api/v1/book/singleBook',{
-      //  bookName: this.books.value.indexOf(this.item.thumbnailUrl)
-        bookName: id
-     })
+     let result = await axios.post(`https://book-project-backend.herokuapp.com/api/v1/book/singleBook`,{title:id})
      console.log('result::->',result)
      }
 
 
-    // Book.getSingleBook()
+    // Book.getSingleBook({bookName:id})
     // .then((response)=>{
     //   this.books = response.data;
-    // console.log("books.value array ----->",this.books.value.title)
+    // console.log("books.value array ----->",this.bookName)
 
     // }).catch((err)=>{
     //   console.log(err);
