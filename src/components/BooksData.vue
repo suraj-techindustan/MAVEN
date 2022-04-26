@@ -1,36 +1,44 @@
 <template>
+<h1>Book data</h1>
  
     <div className="tile-container">
       <div v-for="item in books.value" :key="item.id" :class="{card:true,imgFont:true}"  >
-           <div id="myDiv" ref="myDiv"><button  @click="retriveSingleBook(item?.title)">
+          <button  @click="retriveSingleBook(item?.title)">
               <img :src="item.thumbnailUrl" alt="thumbnailUrl"  />
-              </button></div>
+              </button>
          {{item.title}}
   
 
       </div>
     </div>
+
+<ShopPage :bookData="bookData" />
 </template>
 
 <script>
 import axios from 'axios'
+import ShopPage from './ShopPage.vue'
+const baseUlr = process.env.VUE_APP_ROOT_API;
 
 import Book from "../Book";
 export default {
   name: "BookData",
+  components:{
+    ShopPage
+  },
   data() {
     return {
       books: [],
       jsonCon: [],
       bookName:'',
-      myDiv : this.$refs.myDiv
+      bookData:{},
+ 
 
     };
   },
   created() {
     this.retrivesBooks();
-    this.retriveSingleBook();
-   
+     
   },
 
 
@@ -53,21 +61,20 @@ export default {
 
     console.log('clicked..',id)
 
-     let result = await axios.post(`https://book-project-backend.herokuapp.com/api/v1/book/singleBook`,{title:id})
+     let result = await axios.post(`${baseUlr}/api/v1/book/singleBook`,{title:id})
      console.log('result::->',result)
+     this.bookData = result
+    //  console.log('ShopData',this.shopData)
+     if(result.status==200){
+       console.log(' redirecting to Shop page')
+       this.$router.push({name:'ShopPage'})
      }
 
+     }
+     
 
-    // Book.getSingleBook({bookName:id})
-    // .then((response)=>{
-    //   this.books = response.data;
-    // console.log("books.value array ----->",this.bookName)
 
-    // }).catch((err)=>{
-    //   console.log(err);
-    // });
-    
-  // }
+
 
   },
 };
@@ -92,7 +99,7 @@ export default {
     font-family:Tahoma;
     color:black;
     background-color: #4CAF50;
-    border-radius: 5px;
+    border-radius: 5px; 
     position: absolute;
     right: 90px;
 

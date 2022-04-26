@@ -1,18 +1,19 @@
 <template>
-    <h3>Shop Page</h3>
-    <h3>Shop Page</h3>
-    <h3>Shop Page</h3>
-    <h3>Shop Page</h3>
-    <h3>Shop Page</h3>
-    <h3>Shop Page</h3>
-    <h3>Shop Page</h3>
-     
+    <h1>This is Shop Page..</h1>
+
+<P>{{bookData}}</P>
 </template>
 
 <script>
 export default{
-name : "ShopPage",
-
+    name:"ShopPage",
+    props:{
+        bookData:Object
+    },
+    data(){
+        console.log('Book Data : ', this.bookData)
+    }
 }
+
 
 </script>

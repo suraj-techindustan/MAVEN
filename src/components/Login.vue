@@ -15,8 +15,9 @@
 </template>
 
 <script>
-
 import axios from 'axios'
+const baseUlr = process.env.VUE_APP_ROOT_API;
+
 export default{
     name:'Login',
     data(){
@@ -28,7 +29,7 @@ export default{
     methods:{
         async login(){
             console.log('Event for login :::' , this.email , this.password)
-            let result = await axios.post('https://maven-backend-62w3ju80o-suraj-techindustan.vercel.app/api/v1/user/login',{
+            let result = await axios.post(`${baseUlr}/api/v1/user/login`,{
                 email:this.email,
                 password:this.password
             })
