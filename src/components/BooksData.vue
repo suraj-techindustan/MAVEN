@@ -12,7 +12,8 @@
       </div>
     </div>
 
-<ShopPage :bookData="bookData" />
+<!-- <ShopPage :bookData="bookData" /> -->
+<ShopPage :message="message" ></ShopPage>
 </template>
 
 <script>
@@ -32,6 +33,7 @@ export default {
       jsonCon: [],
       bookName:'',
       bookData:{},
+      message:"This data is from BookData component"
  
 
     };
@@ -63,18 +65,17 @@ export default {
 
      let result = await axios.post(`${baseUlr}/api/v1/book/singleBook`,{title:id})
      console.log('result::->',result)
-     this.bookData = result
+     this.bookData = {...result}
+     console.log('bookdata : ', this.bookData);
     //  console.log('ShopData',this.shopData)
      if(result.status==200){
        console.log(' redirecting to Shop page')
+       console.log('message : ', this.message)
        this.$router.push({name:'ShopPage'})
      }
 
      }
      
-
-
-
 
   },
 };

@@ -1,18 +1,20 @@
 <template>
     <h1>This is Shop Page..</h1>
 
-<P>{{bookData}}</P>
+<P>Message : {{message}}</P>
 </template>
 
 <script>
 export default{
     name:"ShopPage",
-    props:{
-        bookData:Object
-    },
-    data(){
-        console.log('Book Data : ', this.bookData)
-    }
+    props:
+        ["message"]
+        // bookData:Object
+    
+    // data(){
+    //     // console.log('Book Data : ', this.bookData)
+    //     // console.log('Book Data : ', this.message)
+    // }
 }
 
 
